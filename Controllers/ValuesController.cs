@@ -17,6 +17,7 @@ namespace apiEDT.Controllers
             return new string[] { "value1", "value2" };
         }
 
+/*
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
@@ -24,6 +25,7 @@ namespace apiEDT.Controllers
             return "value";
         }
 
+        
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)
@@ -40,6 +42,6 @@ namespace apiEDT.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
+        }*/
     }
 }
