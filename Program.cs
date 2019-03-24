@@ -19,7 +19,6 @@ namespace apiEDT
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-    //test 2/2
+                .UseStartup<Startup>();    
     }
 }

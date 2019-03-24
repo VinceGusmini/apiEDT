@@ -8,6 +8,7 @@ namespace apiEDT.Back.Models
 {
     public class Period
     {
+        [Key]
         public int id_period { get; set; }
         public int id_promo { get; set; }
         public string label { get; set; }

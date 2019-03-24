@@ -8,6 +8,7 @@ namespace apiEDT.Back.Models
 {
     public class Matiere
     {
+        [Key]
         public int id_mat { get; set; }
         public int id_ue { get; set; }
         public int id_mod { get; set; }

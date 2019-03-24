@@ -8,6 +8,7 @@ namespace apiEDT.Back.Models
 {
     public class Uemodule
     {
+        [Key]
         public int id_uemod { get; set; }
         public int id_form { get; set; }
         public string classif { get; set; }        
