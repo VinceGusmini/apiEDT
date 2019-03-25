@@ -19,15 +19,6 @@ namespace apiEDT.Controllers
         public MatiereController(apiEDTContext context)
         {
             _context = context;
-            /*
-            if (_context.TodoItems.Count() == 0)
-            {
-                // Create a new TodoItem if collection is empty,
-                // which means you can't delete all TodoItems.
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
-                _context.SaveChanges();
-            }
-             */
         }
 
 
@@ -36,18 +27,10 @@ namespace apiEDT.Controllers
         [ProducesResponseType(typeof(IEnumerable<Matiere>), StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Matiere>> Get()
         {
-            //[ProducesResponseType(typeof(Matiere), 200)]
-            //public ActionResult<IEnumerable<string>> Get()
+            List<Matiere> matieres = _context.Matiere.ToList(); 
             
-            //List<Matiere> matieres = _context.Matieres.ToList(); 
+            if(matieres.Count == 0){ return NotFound(); }
 
-            //matiere == null
-            //if(true){ return NotFound(); }
-            Matiere matiere1 = new Matiere();
-            Matiere matiere2 = new Matiere();
-            List<Matiere> matieres = new List<Matiere>();
-            matieres.Add(matiere1);
-            matieres.Add(matiere2);
             return Ok(matieres);
         }
 
@@ -57,14 +40,10 @@ namespace apiEDT.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Matiere>> GetById(int id)
         {
-            //[ProducesResponseType(typeof(Matiere), 200)]
-            //public ActionResult<IEnumerable<string>> Get()
-            
-            //Matiere matiere = await _context.Matieres.FindAsync(id); 
+            Matiere matiere = await _context.Matiere.FindAsync(id); 
 
-            //matiere == null
-            //if(true){ return NotFound(); }
-            Matiere matiere = new Matiere();
+            if(matiere == null){ return NotFound(); }
+
             return Ok(matiere);
         }
 

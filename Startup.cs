@@ -28,7 +28,7 @@ namespace apiEDT
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<apiEDTContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("apiEDTDatabase")));
+                opt.UseMySQL(Configuration.GetConnectionString("apiEDTDatabase")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

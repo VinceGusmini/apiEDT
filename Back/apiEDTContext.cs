@@ -11,8 +11,8 @@ namespace apiEDT.Back
         {
         }
 
-        public DbSet<Matiere> Matieres { get; set; }
-        public DbSet<Period> Periods { get; set; }
-        public DbSet<Uemodule> Uemodules { get; set; }
+        public DbSet<Matiere> Matiere { get; set; }
+        public DbSet<Period> Period { get; set; }
+        public DbSet<Uemodule> Uemodule { get; set; }
     }
 }

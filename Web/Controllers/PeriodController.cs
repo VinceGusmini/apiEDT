@@ -19,15 +19,6 @@ namespace apiEDT.Controllers
         public PeriodController(apiEDTContext context)
         {
             _context = context;
-            /*
-            if (_context.TodoItems.Count() == 0)
-            {
-                // Create a new TodoItem if collection is empty,
-                // which means you can't delete all TodoItems.
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
-                _context.SaveChanges();
-            }
-             */
         }
 
 
@@ -35,19 +26,11 @@ namespace apiEDT.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Period>), StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Period>> Get()
-        {
-            //[ProducesResponseType(typeof(Period), 200)]
-            //public ActionResult<IEnumerable<string>> Get()
-            
-            //List<Period> periods = _context.Periods.ToList(); 
+        {   
+            List<Period> periods = _context.Period.ToList(); 
 
-            //Period == null
-            //if(true){ return NotFound(); }
-            Period period1 = new Period();
-            Period period2 = new Period();
-            List<Period> periods = new List<Period>();
-            periods.Add(period1);
-            periods.Add(period2);
+            if(periods.Count == 0){ return NotFound(); }
+
             return Ok(periods);
         }
 
@@ -57,14 +40,10 @@ namespace apiEDT.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Period>> GetById(int id)
         {
-            //[ProducesResponseType(typeof(Period), 200)]
-            //public ActionResult<IEnumerable<string>> Get()
-            
-            //Period period = await _context.Periods.FindAsync(id); 
+            Period period = await _context.Period.FindAsync(id); 
 
-            //Period == null
-            //if(true){ return NotFound(); }
-            Period period = new Period();
+            if(period == null){ return NotFound(); }
+
             return Ok(period);
         }
 

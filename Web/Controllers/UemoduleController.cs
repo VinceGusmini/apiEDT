@@ -19,15 +19,6 @@ namespace apiEDT.Controllers
         public UemoduleController(apiEDTContext context)
         {
             _context = context;
-            /*
-            if (_context.TodoItems.Count() == 0)
-            {
-                // Create a new TodoItem if collection is empty,
-                // which means you can't delete all TodoItems.
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
-                _context.SaveChanges();
-            }
-             */
         }
 
 
@@ -36,18 +27,10 @@ namespace apiEDT.Controllers
         [ProducesResponseType(typeof(IEnumerable<Uemodule>), StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Uemodule>> Get()
         {
-            //[ProducesResponseType(typeof(Uemodule), 200)]
-            //public ActionResult<IEnumerable<string>> Get()
-            
-            //List<Uemodule> uemodules = _context.Uemodules.ToList(); 
+            List<Uemodule> uemodules = _context.Uemodule.ToList(); 
 
-            //Uemodule == null
-            //if(true){ return NotFound(); }
-            Uemodule uemodule1 = new Uemodule();
-            Uemodule uemodule2 = new Uemodule();
-            List<Uemodule> uemodules = new List<Uemodule>();
-            uemodules.Add(uemodule1);
-            uemodules.Add(uemodule2);
+            if(uemodules.Count == 0){ return NotFound(); }
+
             return Ok(uemodules);
         }
 
@@ -57,14 +40,10 @@ namespace apiEDT.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Uemodule>> GetById(int id)
         {
-            //[ProducesResponseType(typeof(Uemodule), 200)]
-            //public ActionResult<IEnumerable<string>> Get()
-            
-            //Uemodule uemodule = await _context.Uemodules.FindAsync(id); 
+            Uemodule uemodule = await _context.Uemodule.FindAsync(id); 
 
-            //Uemodule == null
-            //if(true){ return NotFound(); }
-            Uemodule uemodule = new Uemodule();
+            if(uemodule == null){ return NotFound(); }
+
             return Ok(uemodule);
         }
 
