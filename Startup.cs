@@ -22,6 +22,9 @@ namespace apiEDT
             Configuration = configuration;
         }
 
+        //Cross-Origin Resource Sharing
+        readonly string MyAllowSpecificOrigins = "_MyAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -29,7 +32,19 @@ namespace apiEDT
         {
             services.AddDbContext<apiEDTContext>(opt =>
                 opt.UseMySQL(Configuration.GetConnectionString("apiEDTDatabase")));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost","https://localhost")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +62,7 @@ namespace apiEDT
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseCors(MyAllowSpecificOrigins);
         }
     }
 }
