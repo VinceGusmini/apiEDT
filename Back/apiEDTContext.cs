@@ -15,5 +15,6 @@ namespace apiEDT.Back
         public DbSet<Period> Period { get; set; }
         public DbSet<Uemodule> Uemodule { get; set; }
         public DbSet<EdtItem> EdtItem { get; set; }
+        public DbSet<Promotion> Promotion { get; set; }
     }
 }

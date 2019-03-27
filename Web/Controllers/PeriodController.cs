@@ -27,6 +27,7 @@ namespace apiEDT.Controllers
         // api/period
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Period>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<Period>> Get()
         {   
             List<Period> periods = _context.Period.ToList(); 
@@ -47,6 +48,24 @@ namespace apiEDT.Controllers
             if(period == null){ return NotFound(); }
 
             return Ok(period);
+        }
+
+        // api/period/promo{id}
+        [HttpGet("/promo/{id}")]
+        [ProducesResponseType(typeof(IEnumerable<Period>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult<Period>> GetByIdPromo(int id)
+        {
+            Promotion promo = await _context.Promotion.FindAsync(id);
+            
+            if(promo == null){ return BadRequest(); }
+
+            List<Period> periods = _context.Period.Where(x => x.id_promo == id).ToList(); 
+
+            if(periods.Count == 0){ return NoContent(); }
+
+            return Ok(periods);
         }
         #endregion
 
