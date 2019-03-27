@@ -22,6 +22,8 @@ namespace apiEDT.Controllers
         }
 
 
+        #region GET == Read
+
         // api/matiere
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Matiere>), StatusCodes.Status200OK)]
@@ -46,10 +48,6 @@ namespace apiEDT.Controllers
 
             return Ok(matiere);
         }
-
-        #region GET == Read
-
-
         #endregion
 
         #region POST == Create

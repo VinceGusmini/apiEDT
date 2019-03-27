@@ -152,23 +152,21 @@ INSERT INTO `edth` (`id_edth`, `tDeb`, `label`, `bCourant`) VALUES
 
 DROP TABLE IF EXISTS `edtitem`;
 CREATE TABLE IF NOT EXISTS `edtitem` (
-  `idItem` int(11) NOT NULL,
-  `idEdt` int(11) NOT NULL,
+  `idItem` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `idPeriod` int(11) NOT NULL,
   `idModule` int(11) NOT NULL,
   `nbHeure` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `edtitem`
 --
 
-INSERT INTO `edtitem` (`idItem`, `idEdt`, `idModule`, `nbHeure`) VALUES
-(999, 999, 999, 999),
-(888, 888, 888, 88),
-(999, 999, 999, 999),
-(888, 888, 888, 88),
-(888, 888, 888, 888),
-(888, 888, 888, 888);
+INSERT INTO `edtitem` (`idItem`, `idPeriod`, `idModule`, `nbHeure`) VALUES
+(1, 1, 1, 199),
+(2, 2, 2, 299),
+(3, 2, 2, 388),
+(4, 1, 1, 488);
 
 -- --------------------------------------------------------
 

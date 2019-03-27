@@ -10,8 +10,8 @@ namespace apiEDT.Back.Models
     {
         [Key]
         public int idItem { get; set; }
-        public int idEdt { get; set; }
-        public string idModule { get; set; }
+        public int idPeriod { get; set; }
+        public int idModule { get; set; }
         public int nbHeure { get; set;}
         
     }

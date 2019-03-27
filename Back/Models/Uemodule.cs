@@ -14,6 +14,5 @@ namespace apiEDT.Back.Models
         public string classif { get; set; }        
         public string nom { get; set; }
         public string label { get; set; }
-
     }
 }

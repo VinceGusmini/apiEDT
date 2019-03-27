@@ -22,6 +22,7 @@ namespace apiEDT.Controllers
             _context = context;
         }
 
+
         #region GET == Read
 
         // api/period
@@ -41,23 +42,23 @@ namespace apiEDT.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Period), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Period>> GetById(int id)
+        public ActionResult<Period> GetById(int id)
         {
-            Period period = await _context.Period.FindAsync(id); 
+            Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault(); 
 
             if(period == null){ return NotFound(); }
 
             return Ok(period);
         }
 
-        // api/period/promo{id}
-        [HttpGet("/promo/{id}")]
+        // api/period/promo/{id}
+        [HttpGet("promo/{id}")]
         [ProducesResponseType(typeof(IEnumerable<Period>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult<Period>> GetByIdPromo(int id)
+        public ActionResult<Period> GetByIdPromo(int id)
         {
-            Promotion promo = await _context.Promotion.FindAsync(id);
+            Promotion promo = _context.Promotion.Where(x => x.id_promo == id).FirstOrDefault();
             
             if(promo == null){ return BadRequest(); }
 
@@ -78,7 +79,7 @@ namespace apiEDT.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Period>> PostPeriod(Period period)
         {
-            //La base est en auto-increment : si !=0 --> risque d'erreur
+            //La BDD est en auto-increment : si !=0 --> erreur
             if(period.id_period != 0){ return BadRequest(); }
 
             if(alreadyExist(period)){ return BadRequest(); }
@@ -90,13 +91,16 @@ namespace apiEDT.Controllers
         }
         #endregion
 
+
         #region PUT == Update
 
 
         #endregion
 
+
         #region DELETE == Delete
 
+        // api/period
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(String),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

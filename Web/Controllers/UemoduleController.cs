@@ -51,7 +51,22 @@ namespace apiEDT.Controllers
 
         #region POST == Create
 
+        // api/uemodule
+        [HttpPost]
+        [ProducesResponseType(typeof(Uemodule), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Uemodule>> PostPeriod(Uemodule uemodule)
+        {
+            //La BDD est en auto-increment : si !=0 --> erreur
+            if(uemodule.id_uemod != 0){ return BadRequest(); }
 
+            //if(alreadyExist(period)){ return BadRequest(); }
+            
+            _context.Uemodule.Add(uemodule);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetById), new { id = uemodule.id_uemod }, uemodule);
+        }
         #endregion
 
         #region PUT == Update
@@ -60,7 +75,20 @@ namespace apiEDT.Controllers
 
         #region DELETE == Delete
 
-        
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(String),StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            var uemodule = await _context.Uemodule.FindAsync(id);
+
+            if (uemodule == null) { return NotFound(); }
+
+            _context.Uemodule.Remove(uemodule);
+            await _context.SaveChangesAsync();
+
+            return Ok(id);
+        }
         #endregion
     }
 }
