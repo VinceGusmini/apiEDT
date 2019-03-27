@@ -13,7 +13,7 @@ namespace apiEDT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("AllowSpecificOrigin")]
+    //[EnableCors("AllowSpecificOrigin")]
     public class PeriodController : ControllerBase
     {
         private readonly apiEDTContext _context;
@@ -27,7 +27,6 @@ namespace apiEDT.Controllers
         // GET api/period
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Period>), StatusCodes.Status200OK)]
-        [EnableCors("AllowSpecificOrigin")]
         public ActionResult<IEnumerable<Period>> Get()
         {   
             List<Period> periods = _context.Period.ToList(); 
