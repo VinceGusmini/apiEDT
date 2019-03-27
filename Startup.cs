@@ -40,9 +40,10 @@ namespace apiEDT
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:42000","https://localhost:42000")
+                    builder.WithOrigins("http://localhost:4200","https://localhost:4200")
                                         .AllowAnyHeader()
-                                        .AllowAnyMethod();
+                                        .AllowAnyMethod()
+                                        .SetIsOriginAllowedToAllowWildcardSubdomains();;
                 });
             });
         }
