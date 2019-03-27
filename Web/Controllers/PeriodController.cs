@@ -13,7 +13,6 @@ namespace apiEDT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("AllowSpecificOrigin")]
     public class PeriodController : ControllerBase
     {
         private readonly apiEDTContext _context;

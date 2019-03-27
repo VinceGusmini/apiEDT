@@ -23,7 +23,7 @@ namespace apiEDT
         }
 
         //Cross-Origin Resource Sharing
-        readonly string AllowSpecificOrigins = "_MyAllowSpecificOrigins";
+        readonly string AllowSpecificOrigins = "AllowSpecificOrigins";
 
         public IConfiguration Configuration { get; }
 
@@ -40,11 +40,10 @@ namespace apiEDT
                 options.AddPolicy(AllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200","https://localhost:4200")
-                                        .AllowAnyOrigin()
-                                        .AllowAnyMethod()
-                                        .AllowAnyHeader()
-                                        .SetIsOriginAllowedToAllowWildcardSubdomains();
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .SetIsOriginAllowedToAllowWildcardSubdomains();
                 });
             });
         }
