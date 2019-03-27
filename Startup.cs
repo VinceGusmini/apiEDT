@@ -40,7 +40,7 @@ namespace apiEDT
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins()
+                    builder.WithOrigins("*")
                                         .AllowAnyHeader()
                                         .AllowAnyMethod()
                                         .SetIsOriginAllowedToAllowWildcardSubdomains();;
