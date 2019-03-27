@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cors;
 using apiEDT.Back;
 using apiEDT.Back.Models;
 
@@ -12,6 +13,7 @@ namespace apiEDT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowSpecificOrigin")]
     public class PeriodController : ControllerBase
     {
         private readonly apiEDTContext _context;

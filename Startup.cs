@@ -23,7 +23,7 @@ namespace apiEDT
         }
 
         //Cross-Origin Resource Sharing
-        readonly string MyAllowSpecificOrigins = "_MyAllowSpecificOrigins";
+        readonly string AllowSpecificOrigins = "_MyAllowSpecificOrigins";
 
         public IConfiguration Configuration { get; }
 
@@ -37,13 +37,13 @@ namespace apiEDT
 
             services.AddCors(options =>
             {
-                options.AddPolicy(MyAllowSpecificOrigins,
+                options.AddPolicy(AllowSpecificOrigins,
                 builder =>
                 {
                     builder.WithOrigins("*")
-                                        .AllowAnyHeader()
+                                        .AllowAnyOrigin()
                                         .AllowAnyMethod()
-                                        .SetIsOriginAllowedToAllowWildcardSubdomains();;
+                                        .AllowAnyHeader();
                 });
             });
         }
@@ -63,7 +63,7 @@ namespace apiEDT
 
             app.UseHttpsRedirection();
             app.UseMvc();
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(AllowSpecificOrigins);
         }
     }
 }
