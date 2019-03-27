@@ -59,7 +59,10 @@ namespace apiEDT.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Period>> PostPeriod(Period period)
         {
-            //if(await alreadyExist(period.id_period)){ return BadRequest(); } si id pas 0 (autoIncre)
+            //La base est en auto-increment : si !=0 --> risque d'erreur
+            if(period.id_period != 0){ return BadRequest(); }
+
+            if(alreadyExist(period)){ return BadRequest(); }
             
             _context.Period.Add(period);
             await _context.SaveChangesAsync();
@@ -76,6 +79,8 @@ namespace apiEDT.Controllers
         #region DELETE == Delete
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(String),StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteById(int id)
         {
             var period = await _context.Period.FindAsync(id);
@@ -85,17 +90,21 @@ namespace apiEDT.Controllers
             _context.Period.Remove(period);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(id);
         }
         #endregion
 
 
-        public async Task<Boolean> alreadyExist(int idItem)
+        public Boolean alreadyExist(Period periodRecu)
         {
-            //faire un test sur création et comparaison
-            Period period = await _context.Period.FindAsync(idItem);
+            List<Period> periods = _context.Period.ToList();
 
-            if(period == null ){ return false; }
+            Period res = periods.Where( x => 
+                                        x.id_promo == periodRecu.id_promo && x.label == periodRecu.label && 
+                                        x.tDeb == periodRecu.tDeb && x.tFin == periodRecu.tFin
+                                      ).FirstOrDefault();
+
+            if(res == null ){ return false; }
             return true;
         }
     }
