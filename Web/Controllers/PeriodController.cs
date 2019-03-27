@@ -75,7 +75,18 @@ namespace apiEDT.Controllers
 
         #region DELETE == Delete
 
-        
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            var period = await _context.Period.FindAsync(id);
+
+            if (period == null) { return NotFound(); }
+
+            _context.Period.Remove(period);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
         #endregion
 
 
