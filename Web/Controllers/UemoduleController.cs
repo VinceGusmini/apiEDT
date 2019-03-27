@@ -21,8 +21,9 @@ namespace apiEDT.Controllers
             _context = context;
         }
 
+        #region GET == Read
 
-        // GET api/Uemodule
+        // api/uemodule
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Uemodule>), StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Uemodule>> Get()
@@ -34,7 +35,7 @@ namespace apiEDT.Controllers
             return Ok(uemodules);
         }
 
-        // GET api/uemodule/{id}
+        // api/uemodule/{id}
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Uemodule), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -46,8 +47,20 @@ namespace apiEDT.Controllers
 
             return Ok(uemodule);
         }
+        #endregion
+
+        #region POST == Create
 
 
+        #endregion
 
+        #region PUT == Update
+
+        #endregion
+
+        #region DELETE == Delete
+
+        
+        #endregion
     }
 }

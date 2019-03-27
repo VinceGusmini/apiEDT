@@ -22,8 +22,9 @@ namespace apiEDT.Controllers
             _context = context;
         }
 
+        #region GET == Read
 
-        // GET api/period
+        // api/period
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Period>), StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Period>> Get()
@@ -35,7 +36,7 @@ namespace apiEDT.Controllers
             return Ok(periods);
         }
 
-        // GET api/period/{id}
+        // api/period/{id}
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Period), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -47,6 +48,44 @@ namespace apiEDT.Controllers
 
             return Ok(period);
         }
+        #endregion
 
+
+        #region POST == Create
+
+        // api/period
+        [HttpPost]
+        [ProducesResponseType(typeof(Period), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Period>> PostPeriod(Period period)
+        {
+            //if(await alreadyExist(period.id_period)){ return BadRequest(); } si id pas 0 (autoIncre)
+            
+            _context.Period.Add(period);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetById), new { id = period.id_period }, period);
+        }
+        #endregion
+
+        #region PUT == Update
+
+
+        #endregion
+
+        #region DELETE == Delete
+
+        
+        #endregion
+
+
+        public async Task<Boolean> alreadyExist(int idItem)
+        {
+            //faire un test sur création et comparaison
+            Period period = await _context.Period.FindAsync(idItem);
+
+            if(period == null ){ return false; }
+            return true;
+        }
     }
 }

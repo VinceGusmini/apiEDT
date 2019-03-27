@@ -22,7 +22,7 @@ namespace apiEDT.Controllers
         }
 
 
-        // GET api/matiere
+        // api/matiere
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Matiere>), StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Matiere>> Get()
@@ -34,7 +34,7 @@ namespace apiEDT.Controllers
             return Ok(matieres);
         }
 
-        // GET api/matiere/{id}
+        // api/matiere/{id}
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Matiere), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -47,7 +47,25 @@ namespace apiEDT.Controllers
             return Ok(matiere);
         }
 
+        #region GET == Read
 
+
+        #endregion
+
+        #region POST == Create
+
+
+        #endregion
+
+        #region PUT == Update
+
+
+        #endregion
+
+        #region DELETE == Delete
+
+        
+        #endregion        
 
     }
 }
