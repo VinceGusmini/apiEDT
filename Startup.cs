@@ -42,8 +42,7 @@ namespace apiEDT
                 {
                     builder.AllowAnyOrigin()
                            .AllowAnyMethod()
-                           .AllowAnyHeader()
-                           .SetIsOriginAllowedToAllowWildcardSubdomains();
+                           .AllowAnyHeader();
                 });
             });
         }
