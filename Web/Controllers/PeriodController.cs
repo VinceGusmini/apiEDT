@@ -32,9 +32,7 @@ namespace apiEDT.Controllers
 
             if(periods.Count == 0){ return NotFound(); }
 
-            var debug = Ok(periods);
-
-            return debug;
+            return Ok(periods);
         }
 
         // GET api/period/{id}
@@ -49,8 +47,6 @@ namespace apiEDT.Controllers
 
             return Ok(period);
         }
-
-
 
     }
 }
