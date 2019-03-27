@@ -40,7 +40,7 @@ namespace apiEDT
                 options.AddPolicy(AllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("*")
+                    builder.WithOrigins("http://localhost:4200","https://localhost:4200")
                                         .AllowAnyOrigin()
                                         .AllowAnyMethod()
                                         .AllowAnyHeader();

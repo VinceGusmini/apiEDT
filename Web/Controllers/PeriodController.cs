@@ -27,6 +27,7 @@ namespace apiEDT.Controllers
         // GET api/period
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Period>), StatusCodes.Status200OK)]
+        [EnableCors("AllowSpecificOrigin")]
         public ActionResult<IEnumerable<Period>> Get()
         {   
             List<Period> periods = _context.Period.ToList(); 
