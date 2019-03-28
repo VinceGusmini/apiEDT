@@ -91,16 +91,13 @@ namespace apiEDT.Controllers
 
         #region DELETE == Delete
 
-        // DELETE: api/Todo/5
+        // api/edtitem
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEdtItem(long id)
         {
             var EdtItem = await _context.EdtItem.FindAsync(id);
 
-            if (EdtItem == null)
-            {
-                return NotFound();
-            }
+            if (EdtItem == null){ return NotFound(); }
 
             _context.EdtItem.Remove(EdtItem);
             await _context.SaveChangesAsync();
@@ -108,6 +105,7 @@ namespace apiEDT.Controllers
             return NoContent();
         }
         #endregion
+
 
         public async Task<Boolean> alreadyExist(int idItem)
         {

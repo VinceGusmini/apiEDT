@@ -87,7 +87,7 @@ namespace apiEDT.Controllers
             _context.Uemodule.Remove(uemodule);
             await _context.SaveChangesAsync();
 
-            return Ok(id);
+            return NoContent();
         }
         #endregion
     }

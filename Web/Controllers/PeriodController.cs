@@ -102,7 +102,7 @@ namespace apiEDT.Controllers
 
         // api/period
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(String),StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteById(int id)
         {
@@ -113,7 +113,7 @@ namespace apiEDT.Controllers
             _context.Period.Remove(period);
             await _context.SaveChangesAsync();
 
-            return Ok(id);
+            return NoContent();
         }
         #endregion
 
