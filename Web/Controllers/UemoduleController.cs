@@ -60,7 +60,7 @@ namespace apiEDT.Controllers
             //La BDD est en auto-increment : si !=0 --> erreur
             if(uemodule.id_uemod != 0){ return BadRequest(); }
 
-            //if(alreadyExist(period)){ return BadRequest(); }
+            if(alreadyExist(uemodule)){ return BadRequest(); }
             
             _context.Uemodule.Add(uemodule);
             await _context.SaveChangesAsync();
@@ -71,6 +71,20 @@ namespace apiEDT.Controllers
 
         #region PUT == Update
 
+        // api/uemodule/{id}
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(Uemodule), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Put(int id, Uemodule uemodule)
+        {
+            if (id != uemodule.id_uemod) { return BadRequest(); }
+
+            _context.Uemodule.Update(uemodule);
+            await _context.SaveChangesAsync();
+
+            //return NoContent();
+            return Ok(uemodule);
+        }
         #endregion
 
         #region DELETE == Delete
@@ -87,8 +101,19 @@ namespace apiEDT.Controllers
             _context.Uemodule.Remove(uemodule);
             await _context.SaveChangesAsync();
 
-            return Ok(id);
+            return NoContent();
         }
         #endregion
+
+        public Boolean alreadyExist(Uemodule uemoduleRecu)
+        {
+            List<Uemodule> modules = _context.Uemodule.ToList();
+
+            Uemodule res = modules.Where(x => x.nom == uemoduleRecu.nom).FirstOrDefault();
+
+            if(res == null){return false;}
+            return true;
+        }
+
     }
 }

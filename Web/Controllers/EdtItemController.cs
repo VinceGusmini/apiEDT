@@ -98,6 +98,21 @@ namespace apiEDT.Controllers
 
         #region PUT == Update
         //400 Bad Request --> when no other 4xx error code is appropriate	
+/* 
+        // api/uemodule/{id}
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(EdtItem), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<EdtItem>> Put(long id, EdtItem item)
+        {
+            if (id != item.Id)
+            {
+                return BadRequest();
+            }
+            _context.Entry(item).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }*/
         #endregion
 
 
@@ -107,11 +122,11 @@ namespace apiEDT.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEdtItem(int id)
         {
-            EdtItem item = _context.EdtItem.Where(x => x.idItem == id).FirstOrDefault();
+            EdtItem edtItem = _context.EdtItem.Where(x => x.idItem == id).FirstOrDefault();
 
-            if (item == null) { return NotFound(); }
+            if (edtItem == null){ return NotFound(); }
 
-            _context.EdtItem.Remove(item);
+            _context.EdtItem.Remove(edtItem);
             await _context.SaveChangesAsync();
 
             return Ok(id);
