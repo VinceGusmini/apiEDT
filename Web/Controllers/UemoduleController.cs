@@ -21,6 +21,7 @@ namespace apiEDT.Controllers
             _context = context;
         }
 
+
         #region GET == Read
 
         // api/uemodule
@@ -49,6 +50,7 @@ namespace apiEDT.Controllers
         }
         #endregion
 
+
         #region POST == Create
 
         // api/uemodule
@@ -69,23 +71,24 @@ namespace apiEDT.Controllers
         }
         #endregion
 
+
         #region PUT == Update
 
-        // api/uemodule/{id}
-        [HttpPut("{id}")]
+        // api/uemodule
+        [HttpPut]
         [ProducesResponseType(typeof(Uemodule), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Put(int id, Uemodule uemodule)
+        public async Task<IActionResult> Put(Uemodule uemodule)
         {
-            if (id != uemodule.id_uemod) { return BadRequest(); }
+           // if (id != uemodule.id_uemod) { return BadRequest(); }
 
             _context.Uemodule.Update(uemodule);
             await _context.SaveChangesAsync();
 
-            //return NoContent();
             return Ok(uemodule);
         }
         #endregion
+
 
         #region DELETE == Delete
 
@@ -104,6 +107,7 @@ namespace apiEDT.Controllers
             return NoContent();
         }
         #endregion
+
 
         public Boolean alreadyExist(Uemodule uemoduleRecu)
         {

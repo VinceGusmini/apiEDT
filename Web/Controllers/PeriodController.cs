@@ -44,8 +44,7 @@ namespace apiEDT.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Period> GetById(int id)
         {
-            Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault(); 
-
+            Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault();
             if(period == null){ return NotFound(); }
 
             return Ok(period);
@@ -56,7 +55,7 @@ namespace apiEDT.Controllers
         [ProducesResponseType(typeof(IEnumerable<Period>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<Period> GetByIdPromo(int id)
+        public ActionResult<Period> GetByPromo(int id)
         {
             Promotion promo = _context.Promotion.Where(x => x.id_promo == id).FirstOrDefault();
             
@@ -68,6 +67,27 @@ namespace apiEDT.Controllers
 
             return Ok(periods);
         }
+
+
+        // api/period/nbheure/{id}
+        [HttpGet("nbheure/{id}")]
+        [ProducesResponseType(typeof(Dictionary<int, int>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]        
+        public ActionResult<Period> GetNbheure(int id)
+        {
+            Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault();
+            if(period == null){ return NotFound(); }
+
+            int countH = 0;
+            Dictionary<int, int> result = new Dictionary<int, int>();            
+
+            List<EdtItem> items = _context.EdtItem.Where(x => x.idPeriod == id).ToList();
+            
+            foreach(EdtItem item in items){ countH += item.nbHeure; }
+            result.Add(id,countH);
+            
+            return Ok(result);
+        }
         #endregion
 
 
@@ -77,7 +97,7 @@ namespace apiEDT.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(Period), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Period>> PostPeriod(Period period)
+        public async Task<ActionResult<Period>> Post(Period period)
         {
             //La BDD est en auto-increment : si !=0 --> erreur
             if(period.id_period != 0){ return BadRequest(); }
@@ -94,18 +114,17 @@ namespace apiEDT.Controllers
 
         #region PUT == Update
 
-        // api/period/{id}
-        [HttpPut("{id}")]
+        // api/period
+        [HttpPut]
         [ProducesResponseType(typeof(Period), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Put(int id, Period period)
+        public async Task<IActionResult> Put(Period period)
         {
-            if (id != period.id_period) { return BadRequest(); }
+            //if (id != period.id_period) { return BadRequest(); }
 
             _context.Period.Update(period);
             await _context.SaveChangesAsync();
 
-            //return NoContent();
             return Ok(period);
         }
         #endregion

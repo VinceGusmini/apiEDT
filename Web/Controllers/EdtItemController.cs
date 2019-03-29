@@ -54,16 +54,16 @@ namespace apiEDT.Controllers
         [HttpGet("period/{id}")]
         [ProducesResponseType(typeof(IEnumerable<EdtItemFront>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<IEnumerable<EdtItem>> GetByPeriod(int id)
         {
-            //TESTER L ID DE LA PERIOD
+            Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault();
+            if(period == null){ return BadRequest(); }
 
-            List<EdtItem> edtItems = _context.EdtItem.Where(x => x.idModule == id).ToList(); 
-
+            List<EdtItem> edtItems = _context.EdtItem.Where(x => x.idModule == id).ToList();
             if(edtItems.Count == 0){ return NotFound(); }
 
             List<EdtItemFront> edtItemsFront = new List<EdtItemFront>();
-
             foreach(EdtItem item in edtItems){
                 EdtItemFront front = new EdtItemFront() ;
                 front.idItem = item.idItem;
@@ -71,6 +71,7 @@ namespace apiEDT.Controllers
                 front.idPeriod = item.idPeriod;
                 front.nbHeure = item.nbHeure;
                 front.nameModule = _context.Uemodule.Where(x => x.id_uemod == item.idModule).FirstOrDefault().nom;
+                edtItemsFront.Add(front);
             }
 
             return Ok(edtItemsFront);
@@ -86,7 +87,7 @@ namespace apiEDT.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<EdtItem>> Post(EdtItem item)
         {
-           // if(await alreadyExist(item.idItem)){ return BadRequest(); }
+           if(alreadyExist(item)){ return BadRequest(); }
             
             _context.EdtItem.Add(item);
             await _context.SaveChangesAsync();
@@ -97,22 +98,20 @@ namespace apiEDT.Controllers
 
 
         #region PUT == Update
-        //400 Bad Request --> when no other 4xx error code is appropriate	
-/* 
-        // api/uemodule/{id}
-        [HttpPut("{id}")]
+
+
+        // api/uemodule
+        [HttpPut]
         [ProducesResponseType(typeof(EdtItem), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<EdtItem>> Put(long id, EdtItem item)
+        public async Task<ActionResult<EdtItem>> Put(EdtItem item)
         {
-            if (id != item.Id)
-            {
-                return BadRequest();
-            }
-            _context.Entry(item).State = EntityState.Modified;
+            //if (id != item.idItem){ return BadRequest(); }
+
+            _context.EdtItem.Update(item);
             await _context.SaveChangesAsync();
             return NoContent();
-        }*/
+        }
         #endregion
 
 
@@ -120,7 +119,7 @@ namespace apiEDT.Controllers
 
         // api/edtitem/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEdtItem(int id)
+        public async Task<IActionResult> DeleteById(int id)
         {
             EdtItem edtItem = _context.EdtItem.Where(x => x.idItem == id).FirstOrDefault();
 
@@ -133,14 +132,13 @@ namespace apiEDT.Controllers
         }
         #endregion
 
-        /* A REFAIRE
         
-        public async Task<Boolean> alreadyExist(int idItem) 
+        public Boolean alreadyExist(EdtItem item) 
         {
-            EdtItem edtItem = await _context.EdtItem.FindAsync(idItem);
+            List<EdtItem> edtItems = _context.EdtItem.Where(x => x.idModule == item.idModule && x.idPeriod == item.idPeriod && x.nbHeure == item.nbHeure).ToList();
 
-            if(edtItem == null ){ return false; }
+            if(edtItems.Count == 0 ){ return false; }
             return true;
-        }*/
+        }
     }
 }
