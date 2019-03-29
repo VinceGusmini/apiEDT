@@ -94,7 +94,20 @@ namespace apiEDT.Controllers
 
         #region PUT == Update
 
+        // api/period/{id}
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(Period), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Put(int id, Period period)
+        {
+            if (id != period.id_period) { return BadRequest(); }
 
+            _context.Period.Update(period);
+            await _context.SaveChangesAsync();
+
+            //return NoContent();
+            return Ok(period);
+        }
         #endregion
 
 
@@ -104,9 +117,9 @@ namespace apiEDT.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteById(int id)
+        public async Task<ActionResult> DeleteById(int id)
         {
-            var period = await _context.Period.FindAsync(id);
+            Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault();
 
             if (period == null) { return NotFound(); }
 

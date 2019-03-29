@@ -81,10 +81,8 @@ namespace apiEDT.Controllers
             {
                 return BadRequest();
             }
-
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return NoContent();
         }*/
         #endregion
