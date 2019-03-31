@@ -214,6 +214,3 @@ project.lock.json
 *.suo
 *.user
 _ReSharper.*
-bin
-obj
-packages

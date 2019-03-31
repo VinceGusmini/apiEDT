@@ -119,9 +119,7 @@ namespace apiEDT.Controllers
         [ProducesResponseType(typeof(Period), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Put(Period period)
-        {
-            //if (id != period.id_period) { return BadRequest(); }
-
+        {            
             _context.Period.Update(period);
             await _context.SaveChangesAsync();
 

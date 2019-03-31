@@ -135,9 +135,9 @@ namespace apiEDT.Controllers
         
         public Boolean alreadyExist(EdtItem item) 
         {
-            List<EdtItem> edtItems = _context.EdtItem.Where(x => x.idModule == item.idModule && x.idPeriod == item.idPeriod && x.nbHeure == item.nbHeure).ToList();
+            EdtItem edtItem = _context.EdtItem.Where(x => x.idModule == item.idModule && x.idPeriod == item.idPeriod && x.nbHeure == item.nbHeure).FirstOrDefault();
 
-            if(edtItems.Count == 0 ){ return false; }
+            if(edtItem == null ){ return false; }
             return true;
         }
     }
