@@ -13,6 +13,5 @@ namespace apiEDT.Back.Models
         public int idPeriod { get; set; }
         public int idModule { get; set; }
         public int nbHeure { get; set;}
-        
     }
 }

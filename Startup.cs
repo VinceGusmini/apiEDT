@@ -63,7 +63,6 @@ namespace apiEDT
             app.UseHttpsRedirection();
             app.UseCors(AllowSpecificOrigins);
             app.UseMvc();
-            
         }
     }
 }

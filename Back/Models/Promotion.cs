@@ -13,6 +13,5 @@ namespace apiEDT.Back.Models
         public int id_form { get; set; }
         public int num { get; set; }
         public string label { get; set; }
-        
     }
 }

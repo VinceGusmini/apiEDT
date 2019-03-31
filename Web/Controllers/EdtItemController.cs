@@ -31,7 +31,6 @@ namespace apiEDT.Controllers
         public ActionResult<IEnumerable<EdtItem>> Get()
         {
             List<EdtItem> edtItems = _context.EdtItem.ToList(); 
-
             if(edtItems.Count == 0){ return NotFound(); }
 
             return Ok(edtItems);
@@ -44,7 +43,6 @@ namespace apiEDT.Controllers
         public ActionResult<EdtItem> GetById(int id)
         {
             EdtItem edtItem = _context.EdtItem.Where(x => x.idItem == id).FirstOrDefault(); 
-
             if(edtItem == null){ return NotFound(); }
 
             return Ok(edtItem);
@@ -99,15 +97,12 @@ namespace apiEDT.Controllers
 
         #region PUT == Update
 
-
         // api/uemodule
         [HttpPut]
         [ProducesResponseType(typeof(EdtItem), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<EdtItem>> Put(EdtItem item)
         {
-            //if (id != item.idItem){ return BadRequest(); }
-
             _context.EdtItem.Update(item);
             await _context.SaveChangesAsync();
             return NoContent();
@@ -122,7 +117,6 @@ namespace apiEDT.Controllers
         public async Task<IActionResult> DeleteById(int id)
         {
             EdtItem edtItem = _context.EdtItem.Where(x => x.idItem == id).FirstOrDefault();
-
             if (edtItem == null){ return NotFound(); }
 
             _context.EdtItem.Remove(edtItem);

@@ -30,7 +30,6 @@ namespace apiEDT.Controllers
         public ActionResult<IEnumerable<Matiere>> Get()
         {
             List<Matiere> matieres = _context.Matiere.ToList(); 
-            
             if(matieres.Count == 0){ return NotFound(); }
 
             return Ok(matieres);
@@ -42,8 +41,7 @@ namespace apiEDT.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Matiere>> GetById(int id)
         {
-            Matiere matiere = await _context.Matiere.FindAsync(id); 
-
+            Matiere matiere = await _context.Matiere.FindAsync(id);
             if(matiere == null){ return NotFound(); }
 
             return Ok(matiere);

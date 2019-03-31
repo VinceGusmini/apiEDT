@@ -19,8 +19,5 @@ namespace apiEDT.Back.Models
         public string couleur { get; set; }
         public string themes { get; set; }
         public string typeEns { get; set; }
-
-//        [Column(TypeName = "datetime2(7)")]
-//        public DateTime? ModificationDate { get; set; }
     }
 }

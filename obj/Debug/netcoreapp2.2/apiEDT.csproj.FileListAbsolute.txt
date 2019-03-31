@@ -1,0 +1,14 @@
+C:\Project\apiRest\apiEDT\bin\Debug\netcoreapp2.2\apiEDT.deps.json
+C:\Project\apiRest\apiEDT\bin\Debug\netcoreapp2.2\apiEDT.runtimeconfig.json
+C:\Project\apiRest\apiEDT\bin\Debug\netcoreapp2.2\apiEDT.runtimeconfig.dev.json
+c:\Project\apiRest\apiEDT\bin\Debug\netcoreapp2.2\apiEDT.dll
+c:\Project\apiRest\apiEDT\bin\Debug\netcoreapp2.2\apiEDT.pdb
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.csprojAssemblyReference.cache
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.csproj.CoreCompileInputs.cache
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.RazorAssemblyInfo.cache
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.RazorAssemblyInfo.cs
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.AssemblyInfoInputs.cache
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.AssemblyInfo.cs
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.RazorTargetAssemblyInfo.cache
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.dll
+c:\Project\apiRest\apiEDT\obj\Debug\netcoreapp2.2\apiEDT.pdb

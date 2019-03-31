@@ -79,9 +79,7 @@ namespace apiEDT.Controllers
         [ProducesResponseType(typeof(Uemodule), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Put(Uemodule uemodule)
-        {
-           // if (id != uemodule.id_uemod) { return BadRequest(); }
-
+        {           
             _context.Uemodule.Update(uemodule);
             await _context.SaveChangesAsync();
 
@@ -92,13 +90,13 @@ namespace apiEDT.Controllers
 
         #region DELETE == Delete
 
+        // api/uemodule/{id}
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(String),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteById(int id)
         {
             var uemodule = await _context.Uemodule.FindAsync(id);
-
             if (uemodule == null) { return NotFound(); }
 
             _context.Uemodule.Remove(uemodule);
@@ -114,10 +112,9 @@ namespace apiEDT.Controllers
             List<Uemodule> modules = _context.Uemodule.ToList();
 
             Uemodule res = modules.Where(x => x.nom == uemoduleRecu.nom).FirstOrDefault();
-
             if(res == null){return false;}
+            
             return true;
         }
-
     }
 }

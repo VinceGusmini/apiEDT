@@ -8,8 +8,7 @@ namespace apiEDT.Back
     {
         public apiEDTContext(DbContextOptions<apiEDTContext> options)
             : base(options)
-        {
-        }
+        {}
 
         public DbSet<Matiere> Matiere { get; set; }
         public DbSet<Period> Period { get; set; }

@@ -14,6 +14,5 @@ namespace apiEDT.Back.Models
         public string label { get; set; }
         public DateTime tDeb { get; set; }
         public DateTime tFin { get; set; }
-        
     }
 }

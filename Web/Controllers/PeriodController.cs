@@ -32,7 +32,6 @@ namespace apiEDT.Controllers
         public ActionResult<IEnumerable<Period>> Get()
         {   
             List<Period> periods = _context.Period.ToList(); 
-
             if(periods.Count == 0){ return NotFound(); }
 
             return Ok(periods);
@@ -58,11 +57,9 @@ namespace apiEDT.Controllers
         public ActionResult<Period> GetByPromo(int id)
         {
             Promotion promo = _context.Promotion.Where(x => x.id_promo == id).FirstOrDefault();
-            
             if(promo == null){ return BadRequest(); }
 
-            List<Period> periods = _context.Period.Where(x => x.id_promo == id).ToList(); 
-
+            List<Period> periods = _context.Period.Where(x => x.id_promo == id).ToList();
             if(periods.Count == 0){ return NoContent(); }
 
             return Ok(periods);
@@ -76,13 +73,13 @@ namespace apiEDT.Controllers
         public ActionResult<Period> GetNbheure(int id)
         {
             Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault();
-            if(period == null){ return NotFound(); }
-
-            int countH = 0;
-            Dictionary<int, int> result = new Dictionary<int, int>();            
+            if(period == null){ return NotFound(); }                       
 
             List<EdtItem> items = _context.EdtItem.Where(x => x.idPeriod == id).ToList();
-            
+
+            Dictionary<int, int> result = new Dictionary<int, int>(); 
+            int countH = 0;
+
             foreach(EdtItem item in items){ countH += item.nbHeure; }
             result.Add(id,countH);
             
@@ -137,7 +134,6 @@ namespace apiEDT.Controllers
         public async Task<ActionResult> DeleteById(int id)
         {
             Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault();
-
             if (period == null) { return NotFound(); }
 
             _context.Period.Remove(period);
