@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 27 mars 2019 à 13:34
--- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
+-- Généré le :  Dim 31 mars 2019 à 18:49
+-- Version du serveur :  5.7.23
+-- Version de PHP :  7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -152,11 +152,12 @@ INSERT INTO `edth` (`id_edth`, `tDeb`, `label`, `bCourant`) VALUES
 
 DROP TABLE IF EXISTS `edtitem`;
 CREATE TABLE IF NOT EXISTS `edtitem` (
-  `idItem` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `idItem` int(11) NOT NULL AUTO_INCREMENT,
   `idPeriod` int(11) NOT NULL,
   `idModule` int(11) NOT NULL,
-  `nbHeure` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `nbHeure` int(11) NOT NULL,
+  PRIMARY KEY (`idItem`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `edtitem`
@@ -545,7 +546,7 @@ CREATE TABLE IF NOT EXISTS `uemodule` (
   `label` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id_uemod`),
   KEY `id_form` (`id_form`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `uemodule`
@@ -556,10 +557,8 @@ INSERT INTO `uemodule` (`id_uemod`, `id_form`, `classif`, `nom`, `label`) VALUES
 (2, 1, 'ue', 'Culture scientifique, sociale et humaine avancées', '32'),
 (3, 1, 'module', 'Programmation Web côté serveur', '3104'),
 (4, 1, 'module', 'Algorithmique avancée', '3103'),
-(5, 1, 'module', 'Conception et programmation objet avancées', '3105'),
 (6, 1, 'module', 'Probabilités et statistiques', '3201'),
-(7, 1, 'module', 'Expression-Communication – Communication\r\nprofessionnelle', '3205'),
-(8, 1, 'module', 'Collaborer en anglais', '3206');
+(7, 1, 'module', 'Expression-Communication – Communication\r\nprofessionnelle', '3205');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

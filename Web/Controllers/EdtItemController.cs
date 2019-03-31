@@ -60,7 +60,7 @@ namespace apiEDT.Controllers
             Period period = _context.Period.Where(x => x.id_period == id).FirstOrDefault();
             if(period == null){ return BadRequest(); }
 
-            List<EdtItem> edtItems = _context.EdtItem.Where(x => x.idModule == id).ToList();
+            List<EdtItem> edtItems = _context.EdtItem.Where(x => x.idPeriod == id).ToList();
             if(edtItems.Count == 0){ return NotFound(); }
 
             List<EdtItemFront> edtItemsFront = new List<EdtItemFront>();
